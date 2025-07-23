@@ -36,16 +36,26 @@ const VisitorCount = mongoose.model('VisitorCount', visitorCountSchema);
 // Express middleware to parse incoming JSON request bodies
 app.use(express.json()); 
 
+// counter-backend/server.js
+
+// ... (rest of your code) ...
+
 // Configure CORS (Cross-Origin Resource Sharing)
-// This middleware allows your frontend (hosted on GitHub Pages) to make requests to this backend.
 const corsOptions = {
-  // The 'origin' must exactly match the URL of your deployed GitHub Pages website.
-  // Example: 'https://abigael-sila.github.io/Abigael-Portfolio-Website/'
-  origin: 'https://abigael-sila.github.io/Abigael-Portfolio-Website/', 
+  // Allow specific origins. Add all domains your frontend might be hosted on.
+  origin: [
+    'https://abigael-sila.github.io', // Base GitHub Pages domain for your user/org pages
+    'https://abigael-sila.github.io/Abigael-Portfolio-Website', // Your specific repo page
+    'http://abigaelsilakalundesila.com', // Your custom domain (if applicable)
+    'https://abigaelsilakalundesila.com', // Your custom domain with HTTPS (if applicable)
+    'http://localhost:3000', // For local development of your frontend (adjust port if different)
+    'http://localhost:5173' // Another common local dev server port (e.g., Vite)
+  ],
   optionsSuccessStatus: 200 // For older browsers compatibility
 };
 app.use(cors(corsOptions));
 
+// ... (rest of your code) ...
 // --- API Routes ---
 
 // 1. Root Route (Optional but Recommended for Status Check)
